@@ -6,9 +6,11 @@
 #    By: althorel <althorel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/04 14:54:09 by althorel          #+#    #+#              #
-#    Updated: 2025/08/12 11:22:23 by althorel         ###   ########.fr        #
+#    Updated: 2025/09/22 18:34:45 by althorel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
+PUSHSWAP_FOLDER = src/
 
 SRCS	= 	cost.c\
 			ft_printf_utils.c\
@@ -43,6 +45,9 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) -I$(INC) $(OBJS) -o $(NAME)
+
+%.o:	${PUSHSWAP_FOLDER}%.c
+		${CC} ${CFLAGS} -I${INC} -c $< -o $@ 
 
 clean:
 		$(RM) $(OBJS)

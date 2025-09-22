@@ -6,11 +6,9 @@
 #    By: althorel <althorel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/30 17:27:20 by althorel          #+#    #+#              #
-#    Updated: 2025/09/22 18:29:03 by althorel         ###   ########.fr        #
+#    Updated: 2025/09/15 20:13:19 by althorel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
-
-LIBFT_FOLDER = src/
 
 SRCS	= 	ft_atoi.c\
 			ft_bzero.c\
@@ -57,16 +55,20 @@ SRCBON	=	ft_lstnew_bonus.c\
 			ft_lstiter_bonus.c\
 			ft_lstmap_bonus.c\
 # les fichiers .c a compiler
-OBJS	= ${SRCS:.c=.o} \
+OBJS	= ${SRCS:.c=.o}
 #  convertir les .c en .o
-OBJBON	= ${SRCBON:.c=.o} \
+OBJBON	= ${SRCBON:.c=.o}
 
 INC = includes
 # recherche dans le repertoire les .h
-NAME = libft.a
+NAME	= libft.a
 #  nom du dossier a la fin
 CC	= cc
 #  compiler
+COLOUR_GREEN	=	\033[0;32m
+
+COLOUR_END		=	\033[0m
+
 RM	= rm -f
 #  supprimer les .o
 CFLAGS	= -Wall -Wextra -Werror
@@ -74,21 +76,22 @@ CFLAGS	= -Wall -Wextra -Werror
 all: $(NAME)
 # commande generale
 $(NAME):	$(OBJS)
-		ar -rcs $@ $^ 
+		@ar -rcs $@ $^ 
 # ^prends ttes les dependances // < que le premier // ar pour creer la librairie 
 # $@ appel la cible et $^ ou $< appel la dependance 
 # $@ = $ $(NAME)
-%.o:	${LIBFT_FOLDER}%.c
-		${CC} ${CFLAGS} -I${INC} -c $< -o $@ 
+%.o:	%.c
+		@${CC} ${CFLAGS} -I${INC} -c $< -o $@ 
 		
 bonus: $(OBJBON)
-		ar -rcs ${NAME} $^ 
+		@ar -rcs ${NAME} $^ 
 # cible / dependance / commande
 clean:
-		$(RM) $(OBJS) $(OBJBON)
+		@$(RM) $(OBJS) $(OBJBON)
 # suppr les .o
 fclean:	clean
-	${RM} ${NAME} 
+	@${RM} ${NAME}
+	@echo "${COLOUR_GREEN}Libft cleaned\n${COLOUR_END}"
 # suppr les anciens .a et .o
 re: fclean
 		make all
